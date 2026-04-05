@@ -1,3 +1,6 @@
+// ==================== INITIALIZE EMAILJS ==================== 
+emailjs.init('2OH0JdoYkJfZbM1tS');
+
 // ==================== SMOOTH SCROLLING & NAVIGATION ==================== 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -5,38 +8,71 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
-            // Close mobile menu if open
             document.querySelector('.nav-menu').classList.remove('active');
         }
     });
 });
 
-// ==================== CONTACT FORM ==================== 
+// ==================== CONTACT FORM WITH EMAILJS ==================== 
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const formData = new FormData(this);
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const subject = this.querySelectorAll('input[type="text"]')[1].value;
-        const message = this.querySelector('textarea').value;
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
         
-        // Create mailto link
-        const mailtoLink = `mailto:bscs24026@itu.edu.pk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        // Show loading state
+        const submitBtn = this.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
         
-        // Open email client
-        window.location.href = mailtoLink;
+        // Template parameters for admin email (YOU receive this)
+        const adminTemplateParams = {
+            to_email: 'azanasghar1813@gmail.com',
+            from_name: name,
+            from_email: email,
+            subject: subject,
+            message: message
+        };
         
-        // Show success message
-        showNotification('Thank you! Your message will be sent from your email client.', 'success');
-        
-        // Reset form
-        setTimeout(() => {
-            this.reset();
-        }, 500);
+        // Send email to admin (YOU)
+        emailjs.send('service_ub57v02', 'template_mdk76d5', adminTemplateParams)
+            .then(function(response) {
+                console.log('Admin email sent successfully!', response);
+                
+                // Send auto-reply to user
+                const userTemplateParams = {
+                    to_email: email,
+                    name: name,
+                    subject: subject,
+                    message: message
+                };
+                
+                return emailjs.send('service_ub57v02', 'template_s34psqd', userTemplateParams);
+            })
+            .then(function(response) {
+                console.log('Auto-reply sent to user!', response);
+                
+                // Reset form
+                contactForm.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Show success message
+                showNotification('✅ Message sent successfully! Check your email for confirmation.', 'success');
+            })
+            .catch(function(error) {
+                console.error('Error sending email:', error);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                showNotification('❌ Failed to send message. Please try again or email directly.', 'error');
+            });
     });
 }
 
@@ -50,12 +86,15 @@ function showNotification(message, type = 'info') {
         top: 20px;
         right: 20px;
         padding: 1rem 2rem;
-        background: ${type === 'success' ? '#27AE60' : '#E74C3C'};
+        background: ${type === 'success' ? '#27AE60' : type === 'error' ? '#E74C3C' : '#1ABC9C'};
         color: white;
         border-radius: 5px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         z-index: 9999;
+        max-width: 400px;
+        word-wrap: break-word;
         animation: slideInRight 0.3s ease-out;
+        font-weight: 500;
     `;
     
     document.body.appendChild(notification);
@@ -63,7 +102,7 @@ function showNotification(message, type = 'info') {
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease-out';
         setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    }, 4000);
 }
 
 // ==================== SCROLL ANIMATIONS ==================== 
@@ -121,16 +160,15 @@ if (hamburger) {
         navMenu.classList.toggle('active');
         hamburger.classList.toggle('active');
     });
-}
-
-// ==================== PARTICLES EFFECT (Optional) ==================== 
-// Add subtle interactive elements on mouse move
-document.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
     
-    // You can add parallax effects here if needed
-});
+    // Close menu when link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+    });
+}
 
 // ==================== CONSOLE WELCOME MESSAGE ==================== 
 console.log(
@@ -138,11 +176,13 @@ console.log(
     'background: #1ABC9C; color: white; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px;'
 );
 console.log('%c Software Developer | Cyber Expert | AI Enthusiast ', 'color: #1ABC9C; font-size: 12px;');
+console.log('%c 📧 Contact: azanasghar1813@gmail.com ', 'color: #27AE60; font-size: 11px;');
+console.log('%c 🔗 GitHub: https://github.com/azanasghar1813 ', 'color: #27AE60; font-size: 11px;');
 
 // ==================== PAGE LOAD ANIMATION ==================== 
 window.addEventListener('load', () => {
     document.body.style.opacity = '1';
 });
 
-body.style.opacity = '0.95';
-body.style.transition = 'opacity 0.5s ease';
+document.body.style.opacity = '0.95';
+document.body.style.transition = 'opacity 0.5s ease';
