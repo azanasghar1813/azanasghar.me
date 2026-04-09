@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <span class="logo-icon"> 🐧</span>
+                <span class="logo-icon">▲</span>
                 <span class="logo-text">Azan Asghar</span>
             </div>
             <div class="nav-menu">
@@ -24,9 +24,14 @@
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <a href="CV.pdf" download class="btn btn-cv">
-                <i class="fas fa-download"></i> Download CV
-            </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="CV.pdf" download class="btn btn-cv">
+                    <i class="fas fa-download"></i> <span class="cv-text">Download CV</span>
+                </a>
+            </div>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -45,7 +50,7 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1 class="hero-title">
-                    Hi, I'm<div> <span class="highlight">Azan Asghar</div></span>
+                    Hi, I'm<br> <span class="highlight">Azan Asghar</span>
                 </h1>
                 
                 <p class="hero-description">
@@ -607,116 +612,115 @@
     </section>
 
     <!-- ==================== CONTACT SECTION ==================== -->
-     
-<section id="contact" class="contact">
-    <div class="section-bg">
-        <div class="section-image"></div>
-        <div class="section-overlay"></div>
-    </div>
+    <section id="contact" class="contact">
+        <div class="section-bg">
+            <div class="section-image"></div>
+            <div class="section-overlay"></div>
+        </div>
 
-    <div class="contact-container">
-        <div class="container section-content">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-                <p class="section-subtitle">Let's discuss your next project or opportunity</p>
-                <div class="title-underline"></div>
-            </div>
-
-            <div class="contact-content">
-                <!-- Contact Info -->
-                <div class="contact-info-section">
-                    <h3>Contact Information</h3>
-                    <p class="contact-intro">
-                        I'm always interested in hearing about new projects and opportunities. Feel free to reach out and let's create something amazing together!
-                    </p>
-
-                    <div class="contact-items">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4>Email</h4>
-                                <a href="mailto:azanasghar1813@gmail.com">azanasghar1813@gmail.com</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4>Phone</h4>
-                                <a href="tel:+923427066034">+92 342 706 6034</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Lahore, Pakistan</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="social-section">
-                        <h4>Connect With Me</h4>
-                        <div class="social-links-grid">
-                            <a href="https://github.com/azanasghar1813" target="_blank" class="social-link-btn">
-                                <i class="fab fa-github"></i>
-                                <span>GitHub</span>
-                            </a>
-                            <a href="https://linkedin.com/in/azanasghar" target="_blank" class="social-link-btn">
-                                <i class="fab fa-linkedin"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="https://x.com/AzanAsghar73" target="_blank" class="social-link-btn">
-                                <i class="fab fa-twitter"></i>
-                                <span>Twitter</span>
-                            </a>
-                            <a href="mailto:azanasghar1813@gmail.com" class="social-link-btn">
-                                <i class="fas fa-envelope"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
+        <div class="contact-container">
+            <div class="container section-content">
+                <div class="section-title">
+                    <h2>Get In Touch</h2>
+                    <p class="section-subtitle">Let's discuss your next project or opportunity</p>
+                    <div class="title-underline"></div>
                 </div>
 
-                <!-- Contact Form -->
-                <form class="contact-form" id="contactForm">
-                    <div class="form-title">Send Me a Message</div>
-                    
-                    <div class="form-group">
-                        <input type="text" id="name" placeholder="Your Full Name" required>
+                <div class="contact-content">
+                    <!-- Contact Info -->
+                    <div class="contact-info-section">
+                        <h3>Contact Information</h3>
+                        <p class="contact-intro">
+                            I'm always interested in hearing about new projects and opportunities. Feel free to reach out and let's create something amazing together!
+                        </p>
+
+                        <div class="contact-items">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4>Email</h4>
+                                    <a href="mailto:azanasghar1813@gmail.com">azanasghar1813@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <a href="tel:+923427066034">+92 342 706 6034</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>Lahore, Pakistan</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-section">
+                            <h4>Connect With Me</h4>
+                            <div class="social-links-grid">
+                                <a href="https://github.com/azanasghar1813" target="_blank" class="social-link-btn">
+                                    <i class="fab fa-github"></i>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="https://linkedin.com/in/azanasghar" target="_blank" class="social-link-btn">
+                                    <i class="fab fa-linkedin"></i>
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a href="https://x.com/AzanAsghar73" target="_blank" class="social-link-btn">
+                                    <i class="fab fa-twitter"></i>
+                                    <span>Twitter</span>
+                                </a>
+                                <a href="mailto:azanasghar1813@gmail.com" class="social-link-btn">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Email</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <input type="email" id="email" placeholder="Your Email Address" required>
-                    </div>
+                    <!-- Contact Form -->
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-title">Send Me a Message</div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Full Name" required>
+                        </div>
 
-                    <div class="form-group">
-                        <input type="text" id="subject" placeholder="Subject" required>
-                    </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Your Email Address" required>
+                        </div>
 
-                    <div class="form-group">
-                        <textarea id="message" placeholder="Tell me about your project or inquiry..." rows="6" required></textarea>
-                    </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" placeholder="Subject" required>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary btn-submit">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
+                        <div class="form-group">
+                            <textarea id="message" placeholder="Tell me about your project or inquiry..." rows="6" required></textarea>
+                        </div>
 
-                    <div class="form-note">
-                        <small>I'll get back to you within 24 hours</small>
-                    </div>
-                </form>
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+
+                        <div class="form-note">
+                            <small>I'll get back to you within 24 hours</small>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
@@ -750,13 +754,10 @@
         </div>
     </footer>
 
-    
     <!-- EmailJS Library -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
-    <!-- Main Script -->
-<script src="script.js"></script>
-</body>
-</html>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
 
+    <!-- Main Script -->
+    <script src="script.js"></script>
 </body>
 </html>
