@@ -5,43 +5,8 @@ if (window.emailjs && typeof window.emailjs.init === 'function') {
     console.warn('EmailJS not loaded. Contact form email sending is disabled.');
 }
 
-// ==================== DARK MODE / LIGHT MODE TOGGLE ==================== 
-const themeToggle = document.getElementById('themeToggle');
-const htmlElement = document.documentElement;
-
-// Check saved theme or default to dark
-const savedTheme = localStorage.getItem('theme') || 'dark';
-htmlElement.setAttribute('data-theme', savedTheme);
-if (themeToggle) {
-    updateThemeIcon(savedTheme);
-}
-
-// Theme toggle button click
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
-}
-
-function updateThemeIcon(theme) {
-    if (!themeToggle) return;
-    const icon = themeToggle.querySelector('i');
-    if (!icon) return;
-    if (theme === 'dark') {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-        themeToggle.title = 'Switch to Light Mode';
-    } else {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-        themeToggle.title = 'Switch to Dark Mode';
-    }
-}
+// ==================== THEME TOGGLE REMOVED ====================
+// The site now uses a unified glassmorphism UI.
 
 // ==================== SMOOTH SCROLLING & NAVIGATION ==================== 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -153,31 +118,77 @@ function showNotification(message, type = 'info') {
     }, 4000);
 }
 
-// ==================== SCROLL ANIMATIONS ==================== 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+// ==================== SCROLL ANIMATIONS (AOS) ==================== 
+document.addEventListener('DOMContentLoaded', () => {
+    // Add AOS attributes dynamically to avoid cluttered HTML
+    document.querySelectorAll('.hero-text').forEach(el => el.setAttribute('data-aos', 'fade-right'));
+    document.querySelectorAll('.hero-visual').forEach(el => el.setAttribute('data-aos', 'fade-left'));
+    document.querySelectorAll('.section-title').forEach(el => el.setAttribute('data-aos', 'fade-up'));
+    document.querySelectorAll('.about-text').forEach(el => el.setAttribute('data-aos', 'fade-right'));
+    document.querySelectorAll('.about-stats').forEach(el => el.setAttribute('data-aos', 'fade-left'));
+    document.querySelectorAll('.career-objective').forEach(el => el.setAttribute('data-aos', 'zoom-in'));
+    
+    document.querySelectorAll('.skill-category').forEach((el, index) => {
+        el.setAttribute('data-aos', 'fade-up');
+        el.setAttribute('data-aos-delay', (index % 4) * 100);
     });
-}, observerOptions);
+    
+    document.querySelectorAll('.project-card').forEach((el, index) => {
+        el.setAttribute('data-aos', 'fade-up');
+        el.setAttribute('data-aos-delay', (index % 3) * 100);
+    });
 
-// Apply animation to elements
-document.querySelectorAll('.skill-category, .project-card, .timeline-item, .stat-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'all 0.6s ease';
-    observer.observe(el);
+    document.querySelectorAll('.timeline-item').forEach((el, index) => {
+        el.setAttribute('data-aos', 'fade-right');
+        el.setAttribute('data-aos-delay', index * 100);
+    });
+
+    document.querySelectorAll('.stat-card').forEach((el, index) => {
+        el.setAttribute('data-aos', 'zoom-in');
+        el.setAttribute('data-aos-delay', index * 100);
+    });
+
+    document.querySelectorAll('.achievements, .learning-goals').forEach(el => el.setAttribute('data-aos', 'fade-left'));
+    document.querySelectorAll('.degree-card, .coursework, .future-goals').forEach(el => el.setAttribute('data-aos', 'fade-right'));
+    document.querySelectorAll('.contact-info-section').forEach(el => el.setAttribute('data-aos', 'fade-right'));
+    document.querySelectorAll('.contact-form').forEach(el => el.setAttribute('data-aos', 'fade-left'));
+
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+    }
+
+    // Initialize Typed.js for Hero Section
+    if (document.querySelector('.typed-role')) {
+        new Typed('.typed-role', {
+            strings: [
+                'Software Developer',
+                'Cyber Enthusiast',
+                'Full-Stack Engineer',
+                'AI Innovator'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true
+        });
+    }
 });
 
-// ==================== ACTIVE NAV LINK ==================== 
+// ==================== ACTIVE NAV LINK & NAVBAR SCROLL ==================== 
 window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+
     const sections = document.querySelectorAll('section[id]');
     let current = '';
     
@@ -485,6 +496,163 @@ forms.forEach(form => {
         });
     });
 });
+
+// ==================== CUSTOM CURSOR ====================
+const cursorDot = document.querySelector('[data-cursor-dot]');
+const cursorOutline = document.querySelector('[data-cursor-outline]');
+
+window.addEventListener('mousemove', (e) => {
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    if (cursorDot && cursorOutline) {
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+
+        cursorOutline.animate({
+            left: `${posX}px`,
+            top: `${posY}px`
+        }, { duration: 150, fill: "forwards" });
+    }
+});
+
+document.querySelectorAll('a, button, .project-card, .skill-item, .contact-item, input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        if(cursorOutline) {
+            cursorOutline.style.width = '60px';
+            cursorOutline.style.height = '60px';
+            cursorOutline.style.backgroundColor = 'rgba(249, 115, 22, 0.1)';
+        }
+    });
+    el.addEventListener('mouseleave', () => {
+        if(cursorOutline) {
+            cursorOutline.style.width = '40px';
+            cursorOutline.style.height = '40px';
+            cursorOutline.style.backgroundColor = 'transparent';
+        }
+    });
+});
+
+// ==================== TSPARTICLES (CYBER NETWORK) ====================
+if (typeof tsParticles !== 'undefined') {
+    tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        interactivity: {
+            events: {
+                onClick: { enable: true, mode: "push" },
+                onHover: { enable: true, mode: "grab" },
+                resize: true
+            },
+            modes: {
+                push: { quantity: 4 },
+                grab: { distance: 140, links: { opacity: 1 } }
+            }
+        },
+        particles: {
+            color: { value: "#F97316" },
+            links: {
+                color: "#FFB382",
+                distance: 150,
+                enable: true,
+                opacity: 0.3,
+                width: 1
+            },
+            move: {
+                direction: "none",
+                enable: true,
+                outModes: { default: "bounce" },
+                random: false,
+                speed: 1,
+                straight: false
+            },
+            number: { density: { enable: true, area: 800 }, value: 80 },
+            opacity: { value: 0.5 },
+            shape: { type: "circle" },
+            size: { value: { min: 1, max: 3 } }
+        },
+        detectRetina: true
+    });
+}
+
+// ==================== HACKER TERMINAL ====================
+const terminalOverlay = document.getElementById('terminalOverlay');
+const openTerminalBtn = document.getElementById('openTerminal');
+const closeTerminalBtn = document.getElementById('closeTerminal');
+const terminalInput = document.getElementById('terminalInput');
+const terminalOutput = document.getElementById('terminalOutput');
+
+if (terminalOverlay && openTerminalBtn) {
+    openTerminalBtn.addEventListener('click', () => {
+        terminalOverlay.classList.add('active');
+        setTimeout(() => terminalInput.focus(), 300);
+    });
+
+    closeTerminalBtn.addEventListener('click', () => {
+        terminalOverlay.classList.remove('active');
+    });
+
+    terminalOverlay.addEventListener('click', (e) => {
+        if (e.target === terminalOverlay) {
+            terminalOverlay.classList.remove('active');
+        }
+    });
+    
+    // Always focus input when clicking inside terminal
+    const terminalWindow = document.querySelector('.terminal-window');
+    if(terminalWindow) {
+        terminalWindow.addEventListener('click', () => {
+            terminalInput.focus();
+        });
+    }
+
+    if(terminalInput) {
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = this.value.trim().toLowerCase();
+                if (command) {
+                    processCommand(command);
+                }
+                this.value = '';
+            }
+        });
+    }
+
+    function processCommand(cmd) {
+        // Echo command
+        const cmdLine = document.createElement('p');
+        cmdLine.innerHTML = `<span class="prompt">azan@portfolio:~$</span> ${cmd}`;
+        terminalOutput.appendChild(cmdLine);
+
+        // Process output
+        const outputLine = document.createElement('p');
+        
+        switch(cmd) {
+            case 'help':
+                outputLine.innerHTML = "Available commands:<br>- <span class='highlight-text'>whoami</span>: Learn about Azan<br>- <span class='highlight-text'>skills</span>: List technical skills<br>- <span class='highlight-text'>clear</span>: Clear terminal<br>- <span class='highlight-text'>sudo hire azan</span>: Execute hiring protocol";
+                break;
+            case 'whoami':
+                outputLine.innerHTML = "Azan Asghar. Software Developer. Cyber Enthusiast. Based in Lahore. Currently building the future at ITU.";
+                break;
+            case 'skills':
+                outputLine.innerHTML = "Initializing skill scan... [OK]<br>Languages: Python, C++, SQL, Dart, JS<br>Tools: React, Node.js, Flutter, Kali Linux<br>Status: Highly capable.";
+                break;
+            case 'sudo hire azan':
+                outputLine.innerHTML = "<span style='color: #ffbd2e;'>[!] INITIALIZING HIGHEST PRIVILEGE HIRING PROTOCOL...</span><br>Bypassing standard HR filters... [SUCCESS]<br>Deploying Azan to your engineering team... [SUCCESS]<br><br>Please contact azanasghar1813@gmail.com to finalize access.";
+                break;
+            case 'clear':
+                terminalOutput.innerHTML = '';
+                return;
+            default:
+                outputLine.innerHTML = `Command not found: ${cmd}. Type 'help' for available commands.`;
+        }
+        
+        terminalOutput.appendChild(outputLine);
+        
+        // Auto scroll to bottom
+        const terminalBody = document.getElementById('terminalBody');
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+}
 
 // ==================== ADD LOADING STATE TO LINKS ==================== 
 document.querySelectorAll('a[download]').forEach(link => {

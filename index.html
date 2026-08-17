@@ -25,6 +25,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1BKGEXNM6Y"></script>
@@ -36,6 +39,10 @@
     </script>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
     <!-- ==================== NAVIGATION BAR ==================== -->
     <nav class="navbar">
         <div class="nav-container">
@@ -52,8 +59,11 @@
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode" style="display: none;">
                     <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-terminal" id="openTerminal" title="Open Hacker Terminal">
+                    <i class="fas fa-terminal"></i>
                 </button>
                 <a href="CV.pdf" download class="btn btn-cv">
                     <i class="fas fa-download"></i> <span class="cv-text">Download CV</span>
@@ -69,8 +79,12 @@
 
     <!-- ==================== HERO SECTION ==================== -->
     <section id="home" class="hero">
-        <div class="hero-bg">
+        <div class="hero-bg" id="tsparticles">
             <div class="hero-image"></div>
+            <!-- Decorative Elements -->
+            <svg class="decor decor-1" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <svg class="decor decor-2" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <svg class="decor decor-3" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12h4l2-9 5 18 2-9h5"></path></svg>
             <div class="hero-overlay"></div>
         </div>
         
@@ -79,7 +93,7 @@
                 <h1 class="hero-title">
                     Hi, I'm<br> <span class="highlight">Azan Asghar</span>
                 </h1>
-                <h2 class="hero-role">Software Developer & Cyber Enthusiast</h2>
+                <h2 class="hero-role"><span class="typed-role"></span></h2>
                 
                 <p class="hero-description">
                     I build smart, secure, and scalable solutions using code, automation, and AI. 
@@ -103,17 +117,17 @@
                     <img src="assets/images/azan.jpg" alt="Azan Asghar">
                     <div class="circle-border"></div>
                 </div>
-                <div class="floating-card card-1">
+                <div class="floating-card card-1 badge-pill">
+                    <i class="fas fa-rocket"></i>
+                    <span>10+ Projects Shipped</span>
+                </div>
+                <div class="floating-card card-2 badge-pill">
                     <i class="fas fa-code"></i>
-                    <span>Code</span>
+                    <span>Full-Stack Developer</span>
                 </div>
-                <div class="floating-card card-2">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Security</span>
-                </div>
-                <div class="floating-card card-3">
-                    <i class="fas fa-brain"></i>
-                    <span>AI</span>
+                <div class="floating-card card-3 badge-pill">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>CS Student @ ITU</span>
                 </div>
             </div>
         </div>
@@ -316,6 +330,82 @@
             </div>
 
             <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-badge">Completed</div>
+                    <div class="project-icon">🛠️</div>
+                    <h3>Karigar PK</h3>
+                    <p class="project-tagline">Two-sided home-services marketplace for Pakistan</p>
+                    <p>A two-sided marketplace connecting Pakistani households with verified skilled workers (electricians, plumbers, etc.), launching first in Lahore. Built end-to-end across web and mobile with a full booking/matching flow, submitted to the Punjab Youth Innovation & Incubation Competition 2026 with a complete pitch deck, business plan, and working prototype.</p>
+                    <div class="project-features">
+                        <span>Structured GitHub workflow</span>
+                        <span>Cross-platform web+mobile</span>
+                        <span>Fast startup</span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Cloudinary</span>
+                        <span class="tech-tag">Flutter</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-badge">Completed</div>
+                    <div class="project-icon">🍔</div>
+                    <h3>Dubaid Foods — Website</h3>
+                    <p class="project-tagline">Customer-facing food ordering site</p>
+                    <p>The customer-side ordering website for Dubaid Foods — browse the menu, place orders, and track them through a simple, fast checkout flow. Built with a clean two-role architecture (Customer/Admin) and WhatsApp-based rider coordination for delivery handoff, so the business could go live fast without a full logistics stack.</p>
+                    <div class="project-features">
+                        <span>WhatsApp-integrated workflow</span>
+                        <span>Simplified admin role</span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Cloudinary</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-badge">Private</div>
+                    <div class="project-icon">🧾</div>
+                    <h3>Dubai Food & Restaurant — POS</h3>
+                    <p class="project-tagline">Offline-first enterprise restaurant POS</p>
+                    <p>An enterprise-grade, offline-first Point-of-Sale billing system built for Dubai Food & Restaurant (Chowk Azam) — runs fully offline so the restaurant floor never goes down, with a layered backend architecture, full auth/RBAC, and order snapshotting for auditability. Includes a Business Intelligence reporting suite, cashier & shift management, and a live order-control dashboard.</p>
+                    <div class="project-features">
+                        <span>6AM–6AM business day</span>
+                        <span>Dynamic BI reports</span>
+                        <span>Fully offline-capable</span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Zustand</span>
+                        <span class="tech-tag">Tailwind</span>
+                        <span class="tech-tag">Framer Motion</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="private-label"><i class="fas fa-lock"></i> Private — Client Software</span>
+                    </div>
+                </div>
+
                 <div class="project-card">
                     <div class="project-badge">In Progress</div>
                     <div class="project-icon">🤖</div>
@@ -784,6 +874,39 @@
 
     <!-- EmailJS Library (ONLY ONCE) -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
+
+    <!-- AOS Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Typed.js Library -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <!-- tsParticles Library -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+    <!-- Hacker Terminal Overlay -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="close-btn" id="closeTerminal"></span>
+                    <span class="min-btn"></span>
+                    <span class="max-btn"></span>
+                </div>
+                <div class="terminal-title">azan@portfolio: ~</div>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-output" id="terminalOutput">
+                    <p class="sys-msg">Welcome to AzanOS v2.0</p>
+                    <p class="sys-msg">Type <span class="highlight-text">'help'</span> to see available commands.</p>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="prompt">azan@portfolio:~$ </span>
+                    <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Script -->
     <script src="script.js"></script>
