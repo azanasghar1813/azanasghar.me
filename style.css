@@ -1090,7 +1090,9 @@ section {
     }
 
     .card-3 {
-        display: none;
+        bottom: -5px;
+        left: 10px;
+        transform: scale(0.9);
     }
 
     .projects-grid {
@@ -1188,7 +1190,26 @@ section {
     }
 
     .badge-pill {
-        display: none;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    .card-1 {
+        left: -15px;
+        top: 0;
+        transform: scale(0.85);
+    }
+
+    .card-2 {
+        right: -15px;
+        bottom: 20px;
+        transform: scale(0.85);
+    }
+
+    .card-3 {
+        bottom: -10px;
+        left: 5px;
+        transform: scale(0.85);
     }
 
     .about-stats {
