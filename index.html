@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Prevent stale caching of HTML -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Azan Asghar — Software Developer &amp; Cyber Expert</title>
   <meta name="description"
     content="Azan Asghar builds smart, secure and scalable software — offline-first POS, ERP & CRM systems, websites, mobile apps and AI assistants. Founder of CoreVex, based in Lahore, working worldwide." />
@@ -32,7 +36,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=1793129377310" />
 
   <!-- JSON-LD Person Schema -->
   <script type="application/ld+json">
@@ -816,7 +820,47 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=1793129377310"></script>
+
+  <!-- Auto-update on new push / deployment -->
+  <script>
+    (function () {
+      var checkInterval = 15000; // Check every 15 seconds
+      var currentVersion = null;
+
+      function checkSiteUpdate() {
+        fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
+          .then(function (res) {
+            if (!res.ok) return null;
+            return res.json();
+          })
+          .then(function (data) {
+            if (!data || !data.version) return;
+            if (currentVersion === null) {
+              currentVersion = String(data.version);
+            } else if (currentVersion !== String(data.version)) {
+              console.log('[AutoUpdate] New deployment detected: ' + data.version + '. Refreshing page...');
+              window.location.reload(true);
+            }
+          })
+          .catch(function () {});
+      }
+
+      // Check on initial load
+      checkSiteUpdate();
+
+      // Background check every 15s
+      setInterval(checkSiteUpdate, checkInterval);
+
+      // Instant check when user switches back to this tab
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') {
+          checkSiteUpdate();
+        }
+      });
+      window.addEventListener('focus', checkSiteUpdate);
+    })();
+  </script>
 </body>
 
 </html>
