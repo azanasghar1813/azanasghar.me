@@ -861,8 +861,21 @@ img {
   object-position: top center;
 }
 
+.work-thumb .thumb-hover {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.work-card:hover .work-thumb .thumb-hover {
+  opacity: 1;
+}
+
 .thumb-karigar {
   background: #e3f2fd;
+}
+
+.thumb-foodtable {
+  background: #ffebee;
 }
 
 .thumb-nova {
